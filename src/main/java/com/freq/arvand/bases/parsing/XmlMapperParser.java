@@ -1,6 +1,7 @@
 package com.freq.arvand.bases.parsing;
 
 
+import com.freq.arvand.bases.config.MapperInfo;
 import com.freq.arvand.bases.config.XmlConfiguration;
 import com.freq.arvand.bases.mapping.MappedStatement;
 import com.freq.arvand.bases.mapping.SqlCommandType;
@@ -8,19 +9,34 @@ import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class XmlMapperParser {
+    private final XmlConfiguration configuration;
 
-    /**
-     * XML Mapper رو می‌خونه و
-     * MappedStatement ها رو وارد Configuration می‌کنه
-     */
-    public void parse(InputStream inputStream, XmlConfiguration configuration) {
+    public XmlMapperParser(XmlConfiguration configuration) {
+        this.configuration = configuration;
+    }
+    public void parse(List<MapperInfo> mapperInfos) {
+
+        for (MapperInfo mapperInfo : mapperInfos) {
+            try {
+                InputStream xmlStream = this.getClass().getClassLoader()
+                        .getResourceAsStream(mapperInfo.getXmlFilePackage());
+                loadXml(xmlStream);
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void loadXml(InputStream xmlStream) {
         try {
             Document doc = DocumentBuilderFactory
                     .newInstance()
                     .newDocumentBuilder()
-                    .parse(inputStream);
+                    .parse(xmlStream);
 
             Element mapper = doc.getDocumentElement();
             String namespace = mapper.getAttribute("namespace");
@@ -29,21 +45,19 @@ public class XmlMapperParser {
 
             for (int i = 0; i < children.getLength(); i++) {
 
-                if (children.item(i).getNodeType() != Node.ELEMENT_NODE)
+                if (children.item(i).getNodeType() != Node.ELEMENT_NODE) {
                     continue;
+                }
 
                 Element e = (Element) children.item(i);
 
-                // select / insert / update ...
-                SqlCommandType type =
-                        SqlCommandType.valueOf(e.getTagName().toUpperCase());
-
                 String id = namespace + "." + e.getAttribute("id");
-                String sql = e.getTextContent().trim();
-
-                configuration.add(
-                        new MappedStatement(id, sql, type, Object.class)
-                );
+                String query = e.getTextContent().trim();
+                String resultType = e.getAttribute("resultType");
+                String type = e.getAttribute("type");
+                MappedStatement ms = new MappedStatement(
+                        id, query, resultType, type);
+                configuration.add(ms);
             }
 
         } catch (Exception e) {

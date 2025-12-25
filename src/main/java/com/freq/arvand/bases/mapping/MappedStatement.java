@@ -4,16 +4,17 @@ public class MappedStatement {
 
     private final String id;              // com.xxx.AuthMapper.login
     private final String sql;             // SELECT ...
-    private final SqlCommandType type;    // SELECT / INSERT ...
-    private final Class<?> resultType;    // فعلاً Mock
+    private final String resultType;
+    private final String queryType;
 
     public MappedStatement(String id, String sql,
-                           SqlCommandType type,
-                           Class<?> resultType) {
+                           String resultType,
+                           String queryType) {
         this.id = id;
         this.sql = sql;
-        this.type = type;
         this.resultType = resultType;
+        this.queryType = queryType;
+
     }
 
     public String getId() {
@@ -24,7 +25,11 @@ public class MappedStatement {
         return sql;
     }
 
-    public SqlCommandType getType() {
-        return type;
+    public String getResultType() {
+        return resultType;
+    }
+
+    public String getQueryType() {
+        return queryType;
     }
 }

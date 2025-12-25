@@ -1,0 +1,17 @@
+<mapper namespace="UserMapper">
+
+    <query id="getAllUser"
+            resultType="java.lang.String"
+            type="NATIVE">
+        select e.userName
+        from arv_user e
+        where e.deleted = 0
+    </query>
+    <query id="getActiveUserCount"
+           resultType="java.lang.String"
+           type="NATIVE">
+        select cast(count(*) as nvarchar2(255)) as count
+        from arv_user e
+        where e.deleted = 0
+    </query>
+</mapper>

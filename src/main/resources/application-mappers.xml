@@ -3,10 +3,6 @@
 <mappers>
     <map>
         <class name="UserImp" addr="com.freq.arvand.bases.user"></class>
-        <xmlFile name="UserMapper" addr="com.freq.arvand.bases.user"></xmlFile>
-    </map>
-    <map>
-        <class name="GroupImp" addr="com.freq.arvand.bases.group"></class>
-        <xmlFile name="GroupMapper" addr="com.freq.arvand.bases.group"></xmlFile>
+        <xmlFile name="UserMapper" addr="mapper/UserMapper.xml"></xmlFile>
     </map>
 </mappers>
