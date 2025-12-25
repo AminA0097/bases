@@ -2,13 +2,10 @@ package com.freq.arvand.bases.registry;
 
 
 
-import com.freq.arvand.bases.binding.MapperProxy;
 import com.freq.arvand.bases.config.MapperInfo;
 import com.freq.arvand.bases.config.XmlConfiguration;
-import com.freq.arvand.bases.parsing.XmlMapperParser;
 
 import java.io.InputStream;
-import java.lang.reflect.Proxy;
 import java.util.List;
 
 public class MapperRegistry {
@@ -32,16 +29,26 @@ public class MapperRegistry {
      * وقتی Mapper پیدا شد، XML مربوطه‌ش لود می‌شه
      */
     public void addMapper(XmlConfiguration xmlConfiguration) {
-
-        String xmlPath =
-                "mapper/" + mapperInterface.getSimpleName() + ".xml";
-
-        InputStream is = mapperInterface
-                .getClassLoader()
-                .getResourceAsStream(xmlPath);
-
-        if (is == null) {
-            throw new RuntimeException("❌ XML not found: " + xmlPath);
+        for(MapperInfo mi : mapperInfo) {
+            String className = mi.getClassName();
+            String xmlPath = mi.getXmlFilePackage() + "." + mi.getXmlFileName();
+            readeXml(xmlPath);
         }
+//        String xmlPath =
+//                "mapper/" + mapperInterface.getSimpleName() + ".xml";
+//
+//        InputStream is = mapperInterface
+//                .getClassLoader()
+//                .getResourceAsStream(xmlPath);
+//
+//        if (is == null) {
+//            throw new RuntimeException("❌ XML not found: " + xmlPath);
+//        }
+    }
+
+    private void readeXml(String xmlPath) {
+        InputStream is =
+//                .getClassLoader()
+//                .getResourceAsStream(xmlPath);
     }
 }

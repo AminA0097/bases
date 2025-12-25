@@ -32,7 +32,7 @@ public class ArvandResolver {
                         Class<?> clazz = Class.forName(className);
                         if (clazz.isInterface() && clazz.isAnnotationPresent(ArvandMapper.class)) {
                             System.out.println("🪄 Found mapper: " + clazz.getName());
-                            registry.addMapper(clazz);
+//                            registry.addMapper(clazz);
                         }
                     }
                 }

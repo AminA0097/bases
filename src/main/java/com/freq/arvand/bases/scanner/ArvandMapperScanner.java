@@ -25,7 +25,7 @@ public class ArvandMapperScanner {
             try {
                 Class<?> clazz = Class.forName(bd.getBeanClassName());
                 System.out.println("🔍 Found mapper: " + clazz.getName());
-                registry.addMapper(clazz);
+//                registry.addMapper(clazz);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
