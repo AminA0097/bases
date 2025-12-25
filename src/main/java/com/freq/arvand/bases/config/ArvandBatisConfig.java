@@ -38,6 +38,8 @@ public class ArvandBatisConfig {
 
         xmlMapperParser.parse(mapperInfos);
         System.out.println("Application Mapper Registry Done Successfully");
+        MapperRegistry registry = new MapperRegistry(configuration);
+        registry.addClass(mapperInfos);
         return null;
     }
 }

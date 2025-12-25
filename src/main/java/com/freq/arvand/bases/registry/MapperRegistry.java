@@ -19,4 +19,8 @@ public class MapperRegistry {
     public MapperRegistry(XmlConfiguration configuration) {
         this.configuration = configuration;
     }
+
+    public void addClass(List<MapperInfo> mapperInfos) {
+
+    }
 }
