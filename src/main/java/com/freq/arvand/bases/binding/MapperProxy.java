@@ -36,8 +36,7 @@ public class MapperProxy implements InvocationHandler {
                     "❌ No mapped statement found for: " + statementId
             );
         }
-
-
+        System.out.println("Sql: " + ms.getSql());
         // TODO: Executor will be here
         return ms;
     }

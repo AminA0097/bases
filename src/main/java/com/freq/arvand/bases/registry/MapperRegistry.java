@@ -44,6 +44,7 @@ public class MapperRegistry {
             );
 
             knownMappers.put(clazz, proxy);
+            System.out.println("Added Method" + proxy.getClass().getName());
         }
     }
 
