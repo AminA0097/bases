@@ -1,6 +1,6 @@
-<mapper namespace="UserMapper">
+<mapper namespace="com.freq.arvand.bases.user.mapper.UserMapper">
 
-    <query id="getAllUser"
+<query id="getAllUser"
             resultType="java.lang.String"
             type="NATIVE">
         select e.userName
@@ -13,5 +13,12 @@
         select cast(count(*) as nvarchar2(255)) as count
         from arv_user e
         where e.deleted = 0
+    </query>
+    <query id="getByUserName"
+           resultType="java.util.List"
+           type="NATIVE">
+        select e.fld_user_id,e,fld_user_name
+        from arv_user e
+        where e.deleted = 0 and e.fld_ser_name = #{userName}
     </query>
 </mapper>

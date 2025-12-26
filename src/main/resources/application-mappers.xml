@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <mappers>
     <map>
-        <class name="UserImp" addr="com.freq.arvand.bases.user"></class>
-        <xmlFile name="UserMapper" addr="mapper/UserMapper.xml"></xmlFile>
+        <class
+                name="UserMapper"
+                addr="com.freq.arvand.bases.user.mapper"/>
+        <xmlFile
+                name="UserMapper"
+                addr="mapper/UserMapper.xml"/>
     </map>
 </mappers>

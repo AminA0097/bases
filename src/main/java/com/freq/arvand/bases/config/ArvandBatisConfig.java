@@ -20,26 +20,32 @@ public class ArvandBatisConfig {
     }
 
     @Bean
-    public MapperRegistry mapperRegistry(XmlConfiguration configuration) {
+    public MapperRegistry mapperRegistry(XmlConfiguration configuration)
+            throws Exception {
 
-        InputStream xmlStream = this.getClass()
-                .getClassLoader()
-                .getResourceAsStream("application-mappers.xml");
+        InputStream stream =
+                getClass().getClassLoader()
+                        .getResourceAsStream("application-mappers.xml");
 
-        if (xmlStream == null) {
-            throw new RuntimeException("❌ application-mappers.xml not found");
+        if (stream == null) {
+            throw new RuntimeException(
+                    "❌ application-mappers.xml not found");
         }
 
-        ArvandBatisConfigParser parser = new ArvandBatisConfigParser();
-        List<MapperInfo> mapperInfos = parser.parse(xmlStream);
+        ArvandBatisConfigParser parser =
+                new ArvandBatisConfigParser();
+        List<MapperInfo> mapperInfos = parser.parse(stream);
 
         XmlMapperParser xmlMapperParser =
                 new XmlMapperParser(configuration);
-
         xmlMapperParser.parse(mapperInfos);
-        System.out.println("Application Mapper Registry Done Successfully");
-        MapperRegistry registry = new MapperRegistry(configuration);
+
+        MapperRegistry registry =
+                new MapperRegistry(configuration);
         registry.addClass(mapperInfos);
-        return null;
+
+        System.out.println("✅ ArvandBatis initialized");
+
+        return registry;
     }
 }

@@ -1,7 +1,5 @@
+
 package com.freq.arvand.bases.binding;
-
-
-
 import com.freq.arvand.bases.config.XmlConfiguration;
 import com.freq.arvand.bases.mapping.MappedStatement;
 
@@ -20,9 +18,12 @@ public class MapperProxy implements InvocationHandler {
     }
 
     @Override
-    public Object invoke(Object proxy,
-                         Method method,
-                         Object[] args) {
+    public Object invoke(Object proxy, Method method, Object[] args)
+            throws Throwable {
+
+        if (Object.class.equals(method.getDeclaringClass())) {
+            return method.invoke(this, args);
+        }
 
         String statementId =
                 mapperInterface.getName() + "." + method.getName();
@@ -31,13 +32,16 @@ public class MapperProxy implements InvocationHandler {
                 configuration.getMappedStatement(statementId);
 
         if (ms == null) {
-            throw new RuntimeException("❌ No SQL found for " + statementId);
+            throw new RuntimeException(
+                    "❌ No mapped statement found for: " + statementId
+            );
         }
 
-        System.out.println("🔥 SQL FOUND:");
+        System.out.println("🔥 SQL FOUND");
         System.out.println(ms.getSql());
+        System.out.println("ReturnType: " + ms.getResultType());
 
-        // فعلاً اجرا نمی‌کنیم
-        return null;
+        // TODO: Executor will be here
+        return ms;
     }
 }
