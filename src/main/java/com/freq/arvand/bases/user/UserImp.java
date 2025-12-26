@@ -16,10 +16,7 @@ public class UserImp implements UserMapper {
 
     public void test(){
         UserMapper mapper = mapperRegistry.getMapper(UserMapper.class);
-        MappedStatement statement = (MappedStatement) mapper.getActiveUserCount();
 
-        statement.getSql();
-        System.out.println("Test Done");
     }
     public UserImp(MapperRegistry mapperRegistry) {
         this.mapperRegistry = mapperRegistry;

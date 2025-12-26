@@ -54,7 +54,6 @@ public class ArvandBatisConfigParser {
                     }
                 }
             }
-            System.out.println(mapperInfos);
             return mapperInfos;
 
         } catch (Exception e) {

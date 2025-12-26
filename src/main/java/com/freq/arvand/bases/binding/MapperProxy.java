@@ -37,9 +37,6 @@ public class MapperProxy implements InvocationHandler {
             );
         }
 
-        System.out.println("🔥 SQL FOUND");
-        System.out.println(ms.getSql());
-        System.out.println("ReturnType: " + ms.getResultType());
 
         // TODO: Executor will be here
         return ms;

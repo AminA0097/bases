@@ -44,8 +44,6 @@ public class ArvandBatisConfig {
                 new MapperRegistry(configuration);
         registry.addClass(mapperInfos);
 
-        System.out.println("✅ ArvandBatis initialized");
-
         return registry;
     }
 }

@@ -15,7 +15,6 @@ public class BasesApplication {
     @Bean
     CommandLineRunner run(UserImp userService) {
         return args -> {
-            System.out.println("✅ Spring is UP, running test...");
             userService.test();
         };
     }
